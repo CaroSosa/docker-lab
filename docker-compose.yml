@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  nginx:
+    build: ./nginx
+    image: lab2-nginx:1
+    container_name: nginx
+    volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - node-1
+      - node-2
+  node-1:
+    image: public.ecr.aws/z7a7e4f2/lab2-ravenclaw:nodejs
+    expose:
+     - 3000
+  node-2:
+    image: public.ecr.aws/z7a7e4f2/lab2-ravenclaw:node-2
+    expose: 
+    - 5000
